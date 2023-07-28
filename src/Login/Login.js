@@ -34,6 +34,8 @@ function Login(props) {
         auth.signInWithPopup(provider).then((result)=>{
             console.log(result.user);
             props.setUser(result.user);
+            localStorage.setItem("email",result.user.email)
+            // props.setIsUser(result.user.email)
         }).catch((error)=>{
             alert(error.message)
         })

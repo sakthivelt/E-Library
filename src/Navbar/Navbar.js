@@ -10,6 +10,7 @@ function Navbar(props) {
 
 
     const [user,setuser]=useState(props.User);
+    console.log("this is form nave ",user)
 
     const [show,setshowvalue]=useState('');
 

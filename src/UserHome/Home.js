@@ -15,8 +15,8 @@ function Home() {
                     </div>
                     <div className="bottom__content">
                             <h5 className="tagline">Smart Learning on your Mobile</h5>
-                            <h1 className="title">Every Ebooks on available here<span>.</span></h1>
-                            <p className="message">You also Buy a book in here online, or with the app.</p>
+                            <h1 className="title">Every Ebooks available here<span>!</span></h1>
+                            <p className="message">You can Read and Buy books here </p>
                             <div className="icons">
                                 <a className="social-icon">
                                 <i id="l_with_fb" className="fab fa-facebook-f"></i>

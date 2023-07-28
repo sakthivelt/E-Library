@@ -7,7 +7,8 @@ import {BrowserRouter as Router} from 'react-router-dom';
 
 function App() {
 
-  const [user,setUser]=useState('s'); 
+  const [user,setUser]=useState(''); 
+  // const [isUser,setIsUser]=useState(localStorage.getItem("email")||'')
 
   const [admin,setAdmin]=useState('');
 
@@ -15,7 +16,7 @@ function App() {
     <div className="App">
 
       {
-      !user?<Login setUser={setUser}/>:<><Router>{admin?<AdminHome user={user} />:<UserHome user={user}/>}</Router></>
+      !user?<Login setUser={setUser} />:<><Router>{admin?<AdminHome user={user} />:<UserHome user={user}/>}</Router></>
       }
     </div>
   );

@@ -5,11 +5,13 @@ import IconButton from "@material-ui/core/IconButton";
 import SendIcon from "@material-ui/icons/Send";
 import BookItems from "../BookItems/BookItems";
 import axios from "axios";
+import GlassmorphismLoaging from "../../Lottie/GlassmorphismLoaging";
 
 function SearchBook() {
   const [searchValue, setsearchValue] = useState("");
   const [result, setresult] = useState([]);
-  const [apiKey] = useState("AIzaSyC81WFUkXFdrUIQfJK4PuFtzV1GxWH_P8k");
+  const [apiKey] = useState(process.env.REACT_APP_API_KEY);
+  const [loading,setLoading]=useState(false)
 
   const bookimage =
     "https://shadycharacters.co.uk/wp/wp-content/uploads/2016/12/Book_IMG_1754-1-e1481474081467.jpg";
@@ -22,6 +24,7 @@ function SearchBook() {
   }
 
   const submitform = () => {
+    setLoading(true)
     axios
       .get(
         "https://www.googleapis.com/books/v1/volumes?q=" +
@@ -31,6 +34,7 @@ function SearchBook() {
           "&maxResults=39"
       )
       .then((data) => {
+        setLoading(false)
         setresult(data.data.items);
         console.log(data.data.items);
       })
@@ -61,16 +65,17 @@ function SearchBook() {
             </h1>
           ) : (
             <>
-              {result.map((book, index) => (
-                <div id={index}>
+              {loading?<GlassmorphismLoaging/>:result.map((book, index) => (
+                <div id={index} key={index}>
                   <BookItems
-                    bookName={book.volumeInfo.readingModes.title}
-                    image={book.volumeInfo.imageLinks.thumbnail}
-                    author={book.volumeInfo.authors}
-                    link1={book.volumeInfo.previewLink}
-                    link2={book.saleInfo.buyLink}
-                    link3={book.volumeInfo.infoLink}
+                    bookName={book?.volumeInfo.readingModes.title}
+                    image={book?.volumeInfo.imageLinks?.thumbnail}
+                    author={book?.volumeInfo.authors}
+                    link1={book?.volumeInfo.previewLink}
+                    link2={book?.saleInfo.buyLink}
+                    link3={book?.volumeInfo.infoLink}
                   />
+                  {/* {book?.accessInfo?.pdf?.isAvailable&&<a href={book?.accessInfo?.pdf?.acsTokenLink}>download</a>} */}
                 </div>
               ))}
             </>
